@@ -1,4 +1,4 @@
-# GC content calculator web app
+# [GC content calculator web app](https://share.streamlit.io/alinasansevich/gc-content-calculator-web-app/main/GC_content_calculator_web_app.py)
 
 Used the streamlit library to create a simple GC content calculator. This is my first web app.
 
