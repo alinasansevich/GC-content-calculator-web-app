@@ -125,6 +125,7 @@ df_gc = pd.DataFrame({
     })
 
 # plot
+st.write('GC content distribution')
 gc_plot = alt.Chart(df_gc).mark_line(point=True).encode(x='Window Number', y='GC%')   
 st.write(gc_plot)
 
