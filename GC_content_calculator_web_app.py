@@ -153,7 +153,7 @@ all_gc, all_windows = gc_per_window(sequence)
 ##### create GC content distribution graph
 window_num = np.arange(1, len(all_gc)+1)
 df_gc = pd.DataFrame({
-    'Window Number': window_num,
+    'Window Position': window_num,
     'GC%': all_gc
     })
 
