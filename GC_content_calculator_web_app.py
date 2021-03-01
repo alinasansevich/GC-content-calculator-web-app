@@ -136,7 +136,7 @@ since a higher GC-content level indicates a relatively higher melting temperatur
 ##### Input Text Box
 #st.sidebar.header('GC Content Calculator Web App')
 st.header('Enter DNA sequence')
-st.subheader('Paste sequence in FASTA format, then press Ctrl+Enter to apply.')
+st.subheader('Paste raw sequence or in FASTA format, then press Ctrl+Enter to apply.')
 st.write('Base Type: Only accepts four letters ATGC (case-insensitive)')
 st.write('Window Size: 30 nucleotides')
 
@@ -159,7 +159,7 @@ df_gc = pd.DataFrame({
 
 # plot
 st.write('GC content distribution')
-gc_plot = alt.Chart(df_gc).mark_line(point=True).encode(x='Window Number', y='GC%')   
+gc_plot = alt.Chart(df_gc).mark_line(point=True).encode(x='Window Position', y='GC%')   
 st.write(gc_plot)
 
 
@@ -170,7 +170,7 @@ st.write(s)
 st.write("""***""")
 
 
-##### Display DataFrame: GC Content vs Window number
+##### Display DataFrame: GC Content vs Window Position
 st.subheader('GC content for each window:')
 # df = pd.DataFrame.from_dict(X, orient='index')
 # df = df.rename({0: 'count'}, axis='columns')
