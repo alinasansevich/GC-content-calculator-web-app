@@ -191,7 +191,7 @@ input_seq = st.text_area("Sequence input", sequence_input, height=250)
 ##### Add button
 button = st.button('Calculate')
 if (button==True):
-    run_app # st.write('run_app') #! replace with your function
+    run_app() # st.write('run_app') #! replace with your function
 
 st.write("""
 ***
