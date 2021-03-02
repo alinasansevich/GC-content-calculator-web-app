@@ -140,18 +140,20 @@ st.subheader('Paste raw sequence or in FASTA format, then press Ctrl+Enter to ap
 st.write('Base Type: Only accepts four letters ATGC (case-insensitive)')
 st.write('Window Size: 30 nucleotides')
 
+
+##### get input sequence
+input_seq = st.text_area("Sequence input", sequence_input, height=250)
+
 ##### Add button
 button = st.button('Calculate')
 if (button==True):
-  st.write('run_app') #! replace with your function
+    run_app # st.write('run_app') #! replace with your function
 
 st.write("""
 ***
 """)
 
 def run_app():
-    # get input sequence
-    input_seq = st.text_area("Sequence input", sequence_input, height=250)
     sequence = remove_header(input_seq)
     # calculate GC content for each 30 bp window and get all windows' sequences
     all_gc, all_windows = gc_per_window(sequence)
