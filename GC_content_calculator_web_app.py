@@ -112,46 +112,7 @@ def gc_per_window(sequence):
     return all_gc, all_windows
 
 
-########################## Web App starts here ##########################
-
-##### Page Title + Text
-image = Image.open('GC_content_calculator.jpeg')
-
-st.image(image, use_column_width=True)
-
-st.write("""
-## What is GC Content?
- 
-GC content percentage is calculated as Count(G + C)/Count(A + T + G + C) * 100%.
-
-The GC pair is bound by three hydrogen bonds, while AT pairs are bound by two hydrogen bonds.
-This means that the GC content affects the stability of DNA molecules, the secondary structure of mRNAs
-and the annealing temperature for primers and template DNA in PCR experiments.
-
-Knowing the GC-content of a DNA region is useful when designing primers for PCR experiments,
-since a higher GC-content level indicates a relatively higher melting temperature.
-***
-""")
-
-##### Input Text Box
-#st.sidebar.header('GC Content Calculator Web App')
-st.header('Enter DNA sequence')
-st.subheader('Paste raw sequence or in FASTA format, then press Ctrl+Enter to apply.')
-st.write('Base Type: Only accepts four letters ATGC (case-insensitive)')
-st.write('Window Size: 30 nucleotides')
-
-
-##### get input sequence
-input_seq = st.text_area("Sequence input", sequence_input, height=250)
-
-##### Add button
-button = st.button('Calculate')
-if (button==True):
-    run_app # st.write('run_app') #! replace with your function
-
-st.write("""
-***
-""")
+########################## Web App function ############################
 
 def run_app():
     sequence = remove_header(input_seq)
@@ -193,6 +154,49 @@ def run_app():
     df_gc_windows = pd.DataFrame.from_dict(gc_windows)
 
     st.write(df_gc_windows)
+
+    
+########################## Web App starts here ##########################
+
+##### Page Title + Text
+image = Image.open('GC_content_calculator.jpeg')
+
+st.image(image, use_column_width=True)
+
+st.write("""
+## What is GC Content?
+ 
+GC content percentage is calculated as Count(G + C)/Count(A + T + G + C) * 100%.
+
+The GC pair is bound by three hydrogen bonds, while AT pairs are bound by two hydrogen bonds.
+This means that the GC content affects the stability of DNA molecules, the secondary structure of mRNAs
+and the annealing temperature for primers and template DNA in PCR experiments.
+
+Knowing the GC-content of a DNA region is useful when designing primers for PCR experiments,
+since a higher GC-content level indicates a relatively higher melting temperature.
+***
+""")
+
+##### Input Text Box
+#st.sidebar.header('GC Content Calculator Web App')
+st.header('Enter DNA sequence')
+st.subheader('Paste raw sequence or in FASTA format, then press Ctrl+Enter to apply.')
+st.write('Base Type: Only accepts four letters ATGC (case-insensitive)')
+st.write('Window Size: 30 nucleotides')
+
+
+##### get input sequence
+input_seq = st.text_area("Sequence input", sequence_input, height=250)
+
+##### Add button
+button = st.button('Calculate')
+if (button==True):
+    run_app # st.write('run_app') #! replace with your function
+
+st.write("""
+***
+""")
+
 
 st.info("""\
           
