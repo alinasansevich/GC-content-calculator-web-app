@@ -140,51 +140,57 @@ st.subheader('Paste raw sequence or in FASTA format, then press Ctrl+Enter to ap
 st.write('Base Type: Only accepts four letters ATGC (case-insensitive)')
 st.write('Window Size: 30 nucleotides')
 
+##### Add button
+button = st.button('Calculate')
+if (button==True):
+  st.write('run calculation') #! replace with your function
+
 st.write("""
 ***
 """)
 
-# get input sequence
-input_seq = st.text_area("Sequence input", sequence_input, height=250)
-sequence = remove_header(input_seq)
-# calculate GC content for each 30 bp window and get all windows' sequences
-all_gc, all_windows = gc_per_window(sequence)
+def run_app():
+    # get input sequence
+    input_seq = st.text_area("Sequence input", sequence_input, height=250)
+    sequence = remove_header(input_seq)
+    # calculate GC content for each 30 bp window and get all windows' sequences
+    all_gc, all_windows = gc_per_window(sequence)
 
-##### create GC content distribution graph
-window_num = np.arange(1, len(all_gc)+1)
-df_gc = pd.DataFrame({
-    'Window Position': window_num,
-    'GC%': all_gc
-    })
+    ##### create GC content distribution graph
+    window_num = np.arange(1, len(all_gc)+1)
+    df_gc = pd.DataFrame({
+        'Window Position': window_num,
+        'GC%': all_gc
+        })
 
-# plot
-st.write('GC content distribution')
-gc_plot = alt.Chart(df_gc).mark_line(point=True).encode(x='Window Position', y='GC%')   
-st.write(gc_plot)
-
-
-##### Display Summary:
-nucleotide_count = DNA_nucleotide_count(sequence)
-s = seq_summary(nucleotide_count)
-st.write(s)
-st.write("""***""")
+    # plot
+    st.write('GC content distribution')
+    gc_plot = alt.Chart(df_gc).mark_line(point=True).encode(x='Window Position', y='GC%')   
+    st.write(gc_plot)
 
 
-##### Display DataFrame: GC Content vs Window Position
-st.subheader('GC content for each window:')
-# df = pd.DataFrame.from_dict(X, orient='index')
-# df = df.rename({0: 'count'}, axis='columns')
-# df.reset_index(inplace=True)
-# df = df.rename(columns = {'index':'nucleotide'})
+    ##### Display Summary:
+    nucleotide_count = DNA_nucleotide_count(sequence)
+    s = seq_summary(nucleotide_count)
+    st.write(s)
+    st.write("""***""")
 
-all_gc_round = [round(x) for x in all_gc] 
 
-gc_windows = {'Window #': window_num,
-              'GC content': all_gc_round,
-              'Sequence': all_windows}
-df_gc_windows = pd.DataFrame.from_dict(gc_windows)
+    ##### Display DataFrame: GC Content vs Window Position
+    st.subheader('GC content for each window:')
+    # df = pd.DataFrame.from_dict(X, orient='index')
+    # df = df.rename({0: 'count'}, axis='columns')
+    # df.reset_index(inplace=True)
+    # df = df.rename(columns = {'index':'nucleotide'})
 
-st.write(df_gc_windows)
+    all_gc_round = [round(x) for x in all_gc] 
+
+    gc_windows = {'Window #': window_num,
+                  'GC content': all_gc_round,
+                  'Sequence': all_windows}
+    df_gc_windows = pd.DataFrame.from_dict(gc_windows)
+
+    st.write(df_gc_windows)
 
 st.info("""\
           
