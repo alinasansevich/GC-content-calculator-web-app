@@ -93,18 +93,20 @@ def remove_header(input_seq):
         return sequence
 
 
-def gc_per_window(sequence):
+def gc_per_window(sequence, window_size):
     """
     (str) -> list, list
-    "Walk" over the sequence and calculate the GC content for each 30 nucleotide window.
+    "Walk" over the sequence and calculate the GC content for each window_size nucleotide window.
     Returns 2 lists:
     * "all_gc" contains the GC content values,
-    * "all_windows" contains the sequence of each 30 bp window. 
+    * "all_windows" contains the sequence of each window_size bp window.
+
+    * window_size options: 10, 20, 30, 40, or 50 bp, 30 by default.
     """
     all_gc = []
     all_windows = []
-    for i in range(len(sequence) - 30):
-        seq = sequence[i:i+30]
+    for i in range(len(sequence) - window_size):
+        seq = sequence[i:i+window_size]
         gc_cont = gc_content(seq)
         all_gc.append(gc_cont)
         all_windows.append(seq)
@@ -112,11 +114,12 @@ def gc_per_window(sequence):
     return all_gc, all_windows
 
 
-########################## Web App function ############################
+########################## Web App functions ############################
+
 
 def run_app():
     sequence = remove_header(input_seq)
-    # calculate GC content for each 30 bp window and get all windows' sequences
+    # calculate GC content for each window_size bp window and get all windows' sequences
     all_gc, all_windows = gc_per_window(sequence)
 
     ##### create GC content distribution graph
@@ -182,7 +185,10 @@ since a higher GC-content level indicates a relatively higher melting temperatur
 st.header('Enter DNA sequence')
 st.subheader('Paste raw sequence or in FASTA format, then press Ctrl+Enter to apply.')
 st.write('Base Type: Only accepts four letters ATGC (case-insensitive)')
-st.write('Window Size: 30 nucleotides')
+# st.write('Window Size: 30 nucleotides')
+window_size = st.selectbox(label='Choose Window Size',
+                         options=[10, 20, 30, 40, 50],
+                         index=2)
 
 
 ##### get input sequence
