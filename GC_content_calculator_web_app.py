@@ -175,24 +175,24 @@ The GC pair is bound by three hydrogen bonds, while AT pairs are bound by two hy
 This means that the GC content affects the stability of DNA molecules, the secondary structure of mRNAs
 and the annealing temperature for primers and template DNA in PCR experiments.
 
-Knowing the GC-content of a DNA region is useful when designing primers for PCR experiments,
-since a higher GC-content level indicates a relatively higher melting temperature.
+Knowing the GC content of a DNA region is useful when designing primers for PCR experiments,
+since a higher GC content level indicates a relatively higher melting temperature.
 ***
 """)
 
 ##### Input Text Box
 #st.sidebar.header('GC Content Calculator Web App')
 st.header('Enter DNA sequence')
-st.subheader('Paste raw sequence or in FASTA format, then press Ctrl+Enter to apply.')
+st.subheader('Paste sequence below (raw or FASTA format), then choose window size.')
 st.write('Base Type: Only accepts four letters ATGC (case-insensitive)')
-# st.write('Window Size: 30 nucleotides')
-window_size = st.selectbox(label='Choose Window Size',
-                         options=[10, 20, 30, 40, 50],
-                         index=2)
-
 
 ##### get input sequence
 input_seq = st.text_area("Sequence input", sequence_input, height=250)
+
+##### Window Size drop-down menu
+window_size = st.selectbox(label='Choose Window Size',
+                         options=[10, 20, 30, 40, 50],
+                         index=2)
 
 ##### Add button
 button = st.button('Calculate')
