@@ -143,7 +143,7 @@ st.write('Window Size: 30 nucleotides')
 ##### Add button
 button = st.button('Calculate')
 if (button==True):
-  st.write('run calculation') #! replace with your function
+  st.write('run_app') #! replace with your function
 
 st.write("""
 ***
