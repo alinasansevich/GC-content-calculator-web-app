@@ -120,7 +120,7 @@ def gc_per_window(sequence, window_size):
 def run_app():
     sequence = remove_header(input_seq)
     # calculate GC content for each window_size bp window and get all windows' sequences
-    all_gc, all_windows = gc_per_window(sequence)
+    all_gc, all_windows = gc_per_window(sequence, window_size)
 
     ##### create GC content distribution graph
     window_num = np.arange(1, len(all_gc)+1)
